@@ -1,0 +1,251 @@
+/* ── Sidebar layout ─────────────────────────────────────────────────────── */
+
+#swagger-enhancer-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: #1a1d23;
+  border-right: 1px solid #2e323d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  color: #c9d1d9;
+  overflow: hidden;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Push Swagger content so the sidebar doesn't overlay it */
+.swagger-enhancer-shifted {
+  margin-left: 280px !important;
+}
+
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.swagger-enhancer-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #2e323d;
+  flex-shrink: 0;
+}
+
+.swagger-enhancer-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e6edf3;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+/* ── Auth badge ─────────────────────────────────────────────────────────── */
+
+.swagger-enhancer-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, filter 0.15s;
+}
+.swagger-enhancer-auth-badge:hover {
+  filter: brightness(1.2);
+}
+
+.swagger-enhancer-auth-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.swagger-enhancer-auth-authorized {
+  background: rgba(73, 204, 144, 0.15);
+  color: #49cc90;
+}
+.swagger-enhancer-auth-authorized .swagger-enhancer-auth-dot {
+  background: #49cc90;
+  box-shadow: 0 0 0 2px rgba(73, 204, 144, 0.3);
+}
+
+.swagger-enhancer-auth-unauthorized {
+  background: rgba(249, 62, 62, 0.12);
+  color: #f93e3e;
+}
+.swagger-enhancer-auth-unauthorized .swagger-enhancer-auth-dot {
+  background: #f93e3e;
+  box-shadow: 0 0 0 2px rgba(249, 62, 62, 0.25);
+}
+
+.swagger-enhancer-auth-unknown {
+  background: rgba(150, 150, 150, 0.12);
+  color: #8b949e;
+}
+.swagger-enhancer-auth-unknown .swagger-enhancer-auth-dot {
+  background: #8b949e;
+}
+
+/* ── Search ─────────────────────────────────────────────────────────────── */
+
+.swagger-enhancer-search-wrap {
+  padding: 10px 12px;
+  border-bottom: 1px solid #2e323d;
+  flex-shrink: 0;
+}
+
+.swagger-enhancer-search {
+  width: 100%;
+  box-sizing: border-box;
+  background: #13161e;
+  border: 1px solid #404755;
+  border-radius: 6px;
+  color: #e6edf3;
+  font-size: 13px;
+  padding: 6px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.swagger-enhancer-search::placeholder {
+  color: #6b7685;
+}
+.swagger-enhancer-search:focus {
+  border-color: #58a6ff;
+}
+
+/* ── Nav / groups ───────────────────────────────────────────────────────── */
+
+.swagger-enhancer-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.swagger-enhancer-nav::-webkit-scrollbar {
+  width: 5px;
+}
+.swagger-enhancer-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.swagger-enhancer-nav::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+}
+
+.swagger-enhancer-group {
+  margin-bottom: 4px;
+}
+
+.swagger-enhancer-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b0bac5;
+  user-select: none;
+}
+
+.swagger-enhancer-group-header--collapsible {
+  cursor: pointer;
+}
+.swagger-enhancer-group-header--collapsible:hover {
+  color: #e6edf3;
+}
+
+.swagger-enhancer-group-count {
+  margin-left: 2px;
+  padding: 1px 5px;
+  border-radius: 8px;
+  background: #363c4a;
+  font-size: 9px;
+  font-weight: 600;
+  color: #9da8b4;
+  letter-spacing: 0;
+}
+
+/* Chevron — SVG, rotates open/closed */
+.swagger-enhancer-chevron {
+  margin-left: auto;
+  margin-right: 4px;
+  flex-shrink: 0;
+  display: block;
+  transform: rotate(0deg);
+  transition: transform 0.18s ease;
+}
+
+.swagger-enhancer-group[data-collapsed="true"] .swagger-enhancer-chevron {
+  transform: rotate(-90deg);
+}
+
+/* Collapse/expand animation */
+.swagger-enhancer-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  max-height: 4000px;
+  transition: max-height 0.22s ease;
+}
+
+.swagger-enhancer-group[data-collapsed="true"]:not([data-searching]) .swagger-enhancer-items {
+  max-height: 0;
+}
+
+/* ── Individual endpoint items ──────────────────────────────────────────── */
+
+.swagger-enhancer-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.12s, border-color 0.12s;
+  overflow: hidden;
+}
+
+.swagger-enhancer-item:hover {
+  background: #21262d;
+  border-left-color: #58a6ff;
+}
+
+.swagger-enhancer-method {
+  flex-shrink: 0;
+  width: 46px;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.swagger-enhancer-path {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #adbac7;
+  font-size: 12px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* ── Highlight pulse ────────────────────────────────────────────────────── */
+
+.swagger-enhancer-highlight {
+  outline: 2px solid #58a6ff !important;
+  outline-offset: 2px;
+  border-radius: 4px;
+  transition: outline 0.3s ease;
+}
