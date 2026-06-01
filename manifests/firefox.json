@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Swagger Enhancer",
+  "version": "1.0.0",
+  "description": "Adds a quick-navigation sidebar and auth status indicator to Swagger UI pages.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "swagger-enhancer@xrasod",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
