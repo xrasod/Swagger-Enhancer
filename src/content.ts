@@ -257,7 +257,7 @@ function buildSidebar(groups: EndpointGroup[], authStatus: AuthStatus): HTMLDivE
 
   const title = document.createElement("div");
   title.className = "endpoint-atlas-title";
-  title.textContent = "API Navigator";
+  title.textContent = "Endpoint Atlas";
 
   const authBadge = buildAuthBadge(authStatus);
   authBadge.id = "endpoint-atlas-auth-badge";
