@@ -34,10 +34,10 @@ const ctx = await esbuild.context({
 
 const zipDist = () => {
   for (const b of browsers) {
-    const zipPath = path.resolve(`dist/swagger-enhancer-${b}.zip`);
+    const zipPath = path.resolve(`dist/endpoint-atlas-${b}.zip`);
     fs.rmSync(zipPath, { force: true });
     execFileSync("zip", ["-rq", zipPath, "."], { cwd: `dist/${b}` });
-    console.log(`  zipped dist/swagger-enhancer-${b}.zip`);
+    console.log(`  zipped dist/endpoint-atlas-${b}.zip`);
   }
 };
 

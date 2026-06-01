@@ -1,4 +1,4 @@
-# Contributing to Swagger Enhancer
+# Contributing to Endpoint Atlas
 
 Thanks for your interest in contributing! This document outlines how to get set up, the standards we follow, and how to submit changes.
 
@@ -12,8 +12,8 @@ Thanks for your interest in contributing! This document outlines how to get set 
 ### Setup
 
 ```bash
-git clone https://github.com/<your-fork>/swagger-enhancements.git
-cd swagger-enhancements
+git clone https://github.com/<your-fork>/endpoint-atlas.git
+cd endpoint-atlas
 npm install
 ```
 

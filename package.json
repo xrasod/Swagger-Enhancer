@@ -1,5 +1,5 @@
 {
-  "name": "swagger-enhancer",
+  "name": "endpoint-atlas",
   "private": true,
   "scripts": {
     "build": "node build.mjs",

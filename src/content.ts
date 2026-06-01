@@ -1,4 +1,4 @@
-const SIDEBAR_ID = "swagger-enhancer-sidebar";
+const SIDEBAR_ID = "endpoint-atlas-sidebar";
 const COLLAPSE_THRESHOLD = 20;
 
 const METHOD_COLORS: Record<string, string> = {
@@ -24,7 +24,7 @@ interface EndpointGroup {
   ops: Endpoint[];
 }
 
-const log = (...args: unknown[]) => console.debug("[SwaggerEnhancer]", ...args);
+const log = (...args: unknown[]) => console.debug("[EndpointAtlas]", ...args);
 
 // ── Detection ──────────────────────────────────────────────────────────────
 
@@ -128,12 +128,12 @@ const AUTH_LABEL: Record<AuthStatus, string> = {
 
 function buildAuthBadge(status: AuthStatus): HTMLButtonElement {
   const badge = document.createElement("button");
-  badge.className = `swagger-enhancer-auth-badge swagger-enhancer-auth-${status}`;
+  badge.className = `endpoint-atlas-auth-badge endpoint-atlas-auth-${status}`;
   badge.title = "Click to open authorization dialog";
   badge.type = "button";
 
   const dot = document.createElement("span");
-  dot.className = "swagger-enhancer-auth-dot";
+  dot.className = "endpoint-atlas-auth-dot";
 
   const label = document.createElement("span");
   label.textContent = AUTH_LABEL[status];
@@ -157,7 +157,7 @@ function buildChevron(): SVGSVGElement {
   svg.setAttribute("stroke", "currentColor");
   svg.setAttribute("stroke-width", "2");
   svg.setAttribute("stroke-linecap", "round");
-  svg.classList.add("swagger-enhancer-chevron");
+  svg.classList.add("endpoint-atlas-chevron");
   const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
   polyline.setAttribute("points", "2,4 6,8 10,4");
   svg.appendChild(polyline);
@@ -168,17 +168,17 @@ function buildEndpointItem(endpoint: Endpoint): HTMLLIElement {
   const { method, path, element } = endpoint;
 
   const item = document.createElement("li");
-  item.className = "swagger-enhancer-item";
+  item.className = "endpoint-atlas-item";
   item.dataset.method = method;
   item.dataset.path = path.toLowerCase();
 
   const methodBadge = document.createElement("span");
-  methodBadge.className = "swagger-enhancer-method";
+  methodBadge.className = "endpoint-atlas-method";
   methodBadge.textContent = method.toUpperCase();
   methodBadge.style.backgroundColor = METHOD_COLORS[method] ?? "#aaa";
 
   const pathLabel = document.createElement("span");
-  pathLabel.className = "swagger-enhancer-path";
+  pathLabel.className = "endpoint-atlas-path";
   pathLabel.textContent = path;
   pathLabel.title = path;
 
@@ -200,8 +200,8 @@ function buildEndpointItem(endpoint: Endpoint): HTMLLIElement {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
-    element.classList.add("swagger-enhancer-highlight");
-    setTimeout(() => element.classList.remove("swagger-enhancer-highlight"), 1500);
+    element.classList.add("endpoint-atlas-highlight");
+    setTimeout(() => element.classList.remove("endpoint-atlas-highlight"), 1500);
   });
 
   return item;
@@ -211,18 +211,18 @@ function buildGroupEl(group: EndpointGroup, startCollapsed: boolean): HTMLDivEle
   const { tag, ops } = group;
 
   const groupEl = document.createElement("div");
-  groupEl.className = "swagger-enhancer-group";
+  groupEl.className = "endpoint-atlas-group";
   groupEl.dataset.tag = tag;
   groupEl.dataset.collapsed = String(startCollapsed);
 
   const header = document.createElement("div");
-  header.className = "swagger-enhancer-group-header swagger-enhancer-group-header--collapsible";
+  header.className = "endpoint-atlas-group-header endpoint-atlas-group-header--collapsible";
 
   const tagLabel = document.createElement("span");
   tagLabel.textContent = tag;
 
   const countBadge = document.createElement("span");
-  countBadge.className = "swagger-enhancer-group-count";
+  countBadge.className = "endpoint-atlas-group-count";
   countBadge.textContent = String(ops.length);
 
   header.append(tagLabel, countBadge, buildChevron());
@@ -231,7 +231,7 @@ function buildGroupEl(group: EndpointGroup, startCollapsed: boolean): HTMLDivEle
   });
 
   const list = document.createElement("ul");
-  list.className = "swagger-enhancer-items";
+  list.className = "endpoint-atlas-items";
   ops.forEach((op) => list.appendChild(buildEndpointItem(op)));
 
   groupEl.append(header, list);
@@ -243,7 +243,7 @@ function buildNav(groups: EndpointGroup[]): HTMLElement {
   const startCollapsed = totalOps > COLLAPSE_THRESHOLD;
 
   const nav = document.createElement("nav");
-  nav.className = "swagger-enhancer-nav";
+  nav.className = "endpoint-atlas-nav";
   groups.forEach((group) => nav.appendChild(buildGroupEl(group, startCollapsed)));
   return nav;
 }
@@ -253,36 +253,36 @@ function buildSidebar(groups: EndpointGroup[], authStatus: AuthStatus): HTMLDivE
   sidebar.id = SIDEBAR_ID;
 
   const header = document.createElement("div");
-  header.className = "swagger-enhancer-header";
+  header.className = "endpoint-atlas-header";
 
   const title = document.createElement("div");
-  title.className = "swagger-enhancer-title";
+  title.className = "endpoint-atlas-title";
   title.textContent = "API Navigator";
 
   const authBadge = buildAuthBadge(authStatus);
-  authBadge.id = "swagger-enhancer-auth-badge";
+  authBadge.id = "endpoint-atlas-auth-badge";
 
   header.append(title, authBadge);
 
   const searchWrap = document.createElement("div");
-  searchWrap.className = "swagger-enhancer-search-wrap";
+  searchWrap.className = "endpoint-atlas-search-wrap";
   const search = document.createElement("input");
   search.type = "text";
   search.placeholder = "Filter endpoints…";
-  search.className = "swagger-enhancer-search";
+  search.className = "endpoint-atlas-search";
   searchWrap.appendChild(search);
 
   const nav = buildNav(groups);
 
   search.addEventListener("input", () => {
     const query = search.value.toLowerCase().trim();
-    const liveNav = search.closest(`#${SIDEBAR_ID}`)?.querySelector(".swagger-enhancer-nav");
+    const liveNav = search.closest(`#${SIDEBAR_ID}`)?.querySelector(".endpoint-atlas-nav");
     if (!liveNav) return;
 
-    liveNav.querySelectorAll<HTMLElement>(".swagger-enhancer-group").forEach((groupEl) => {
+    liveNav.querySelectorAll<HTMLElement>(".endpoint-atlas-group").forEach((groupEl) => {
       let groupVisible = false;
 
-      groupEl.querySelectorAll<HTMLElement>(".swagger-enhancer-item").forEach((item) => {
+      groupEl.querySelectorAll<HTMLElement>(".endpoint-atlas-item").forEach((item) => {
         const visible =
           !query ||
           (item.dataset.path ?? "").includes(query) ||
@@ -337,13 +337,13 @@ async function init(): Promise<void> {
   const sidebar = buildSidebar(groups, getAuthStatus());
   document.body.appendChild(sidebar);
 
-  document.querySelector(".swagger-ui")?.classList.add("swagger-enhancer-shifted");
+  document.querySelector(".swagger-ui")?.classList.add("endpoint-atlas-shifted");
 
   watchAuthStatus((status) => {
-    const badge = document.getElementById("swagger-enhancer-auth-badge");
+    const badge = document.getElementById("endpoint-atlas-auth-badge");
     if (!badge) return;
     const fresh = buildAuthBadge(status);
-    fresh.id = "swagger-enhancer-auth-badge";
+    fresh.id = "endpoint-atlas-auth-badge";
     badge.replaceWith(fresh);
   });
 
@@ -354,7 +354,7 @@ async function init(): Promise<void> {
     debounceTimer = setTimeout(() => {
       const fresh = parseEndpoints();
       if (fresh.length === 0) return;
-      sidebar.querySelector(".swagger-enhancer-nav")?.replaceWith(buildNav(fresh));
+      sidebar.querySelector(".endpoint-atlas-nav")?.replaceWith(buildNav(fresh));
     }, 500);
   });
 
@@ -372,7 +372,7 @@ const navObserver = new MutationObserver(() => {
   if (currentPath === lastPath) return;
   lastPath = currentPath;
   document.getElementById(SIDEBAR_ID)?.remove();
-  document.querySelector(".swagger-enhancer-shifted")?.classList.remove("swagger-enhancer-shifted");
+  document.querySelector(".endpoint-atlas-shifted")?.classList.remove("endpoint-atlas-shifted");
   init();
 });
 navObserver.observe(document.body, { childList: true, subtree: true });

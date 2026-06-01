@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Swagger Enhancer",
+  "name": "Endpoint Atlas",
   "version": "1.0.0",
   "description": "Adds a quick-navigation sidebar and auth status indicator to Swagger UI pages.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "swagger-enhancer@xrasod",
+      "id": "endpoint-atlas@xrasod",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "required": ["none"]

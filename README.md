@@ -1,10 +1,18 @@
-# Swagger Enhancer
+# Endpoint Atlas
 
 A lightweight browser extension that adds a navigation sidebar to [Swagger UI](https://swagger.io/tools/swagger-ui/) pages, making large API references easier to browse, filter, and authenticate against.
 
+## Install
+
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](#)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white)](#)
+[![Explore on GitHub](https://img.shields.io/badge/Explore-on%20GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/xrasod/endpoint-atlas)
+
+*(Store links go live once the listings are published. To run from source, see [Building from source](#building-from-source).)*
+
 ## Why
 
-Swagger UI works well for a handful of endpoints, but once an API grows to dozens or hundreds it becomes one long scrolling page. Swagger Enhancer adds a fixed sidebar to any Swagger UI page so you can jump straight to the endpoint you need.
+Swagger UI works well for a handful of endpoints, but once an API grows to dozens or hundreds it becomes one long scrolling page. Endpoint Atlas adds a fixed sidebar to any Swagger UI page so you can jump straight to the endpoint you need.
 
 ## Features
 
@@ -15,13 +23,6 @@ Swagger UI works well for a handful of endpoints, but once an API grows to dozen
 - **Live auth indicator** — a status badge shows whether you're authorized; clicking it opens Swagger's Authorize dialog.
 - **Zero configuration** — open any Swagger UI page and the sidebar appears.
 - **Zero data collection** — no analytics, no telemetry, no network requests. Source is open and auditable.
-
-## Install
-
-- **Chrome / Edge / Brave** — [Chrome Web Store listing](#) *(link once published)*
-- **Firefox** — [Firefox Add-ons listing](#) *(link once published)*
-
-To run from source, see [Building from source](#building-from-source) below.
 
 ## Usage
 
@@ -38,8 +39,8 @@ The extension makes no network requests, reads no page data beyond the endpoint 
 Requirements: Node.js 22 and npm.
 
 ```bash
-git clone https://github.com/xrasod/swagger-enhancements.git
-cd swagger-enhancements
+git clone https://github.com/xrasod/endpoint-atlas.git
+cd endpoint-atlas
 npm install
 npm run build
 ```
