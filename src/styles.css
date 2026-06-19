@@ -241,6 +241,64 @@
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
+/* ── Request timing line (injected into Swagger's response panel) ───────── */
+
+.endpoint-atlas-timing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 12px;
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #eef5ff;
+  border: 1px solid #d3e3fb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #4a5663;
+}
+
+.endpoint-atlas-timing-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f6feb;
+}
+
+.endpoint-atlas-timing-sep {
+  color: #b9c6d6;
+}
+
+.endpoint-atlas-timing-status {
+  font-weight: 700;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+.endpoint-atlas-timing-2xx {
+  color: #1a8754;
+}
+.endpoint-atlas-timing-3xx {
+  color: #1f6feb;
+}
+.endpoint-atlas-timing-4xx {
+  color: #c2740c;
+}
+.endpoint-atlas-timing-5xx {
+  color: #d1242f;
+}
+.endpoint-atlas-timing-unknown {
+  color: #6b7685;
+}
+
+.endpoint-atlas-timing-stats {
+  margin-left: auto;
+  color: #8895a4;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 11px;
+}
+
 /* ── Highlight pulse ────────────────────────────────────────────────────── */
 
 .endpoint-atlas-highlight {
