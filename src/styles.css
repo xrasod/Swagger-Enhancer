@@ -246,7 +246,7 @@
 .endpoint-atlas-timing {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   gap: 5px 12px;
   margin: 0 0 14px;
   padding: 8px 12px;
@@ -261,11 +261,15 @@
 
 .endpoint-atlas-timing-primary {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 5px;
   font-size: 13px;
   font-weight: 700;
   color: #1f6feb;
+}
+/* icon has no text baseline — center it so the row's baseline comes from the text */
+.endpoint-atlas-timing-primary svg {
+  align-self: center;
 }
 
 .endpoint-atlas-timing-sep {
@@ -297,6 +301,37 @@
   color: #8895a4;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 11px;
+}
+
+/* Dark variant — toggled by content script when the Swagger page is dark */
+.endpoint-atlas-timing--dark {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: rgba(88, 166, 255, 0.25);
+  color: #adbac7;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-primary {
+  color: #58a6ff;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-sep {
+  color: #495261;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-stats {
+  color: #8b949e;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-2xx {
+  color: #3fb950;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-3xx {
+  color: #58a6ff;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-4xx {
+  color: #d29922;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-5xx {
+  color: #f85149;
+}
+.endpoint-atlas-timing--dark .endpoint-atlas-timing-unknown {
+  color: #8b949e;
 }
 
 /* ── Highlight pulse ────────────────────────────────────────────────────── */

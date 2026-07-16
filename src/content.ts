@@ -329,6 +329,18 @@ function statusClass(status: string | null): string {
   return "endpoint-atlas-timing-unknown";
 }
 
+// Dark Swagger themes are usually custom CSS, not tied to the OS scheme, so
+// detect by sampling the effective background behind the insertion point.
+function isDarkBackground(el: HTMLElement): boolean {
+  for (let node: HTMLElement | null = el; node; node = node.parentElement) {
+    const rgb = getComputedStyle(node).backgroundColor.match(/\d+(\.\d+)?/g);
+    if (!rgb || (rgb.length === 4 && parseFloat(rgb[3]) === 0)) continue;
+    const [r, g, b] = rgb.slice(0, 3).map(Number);
+    return r * 0.299 + g * 0.587 + b * 0.114 < 128;
+  }
+  return false;
+}
+
 function readResponseSize(opblock: HTMLElement, entry: PerformanceResourceTiming): number | null {
   // transferSize/encodedBodySize are populated same-origin (or with a
   // Timing-Allow-Origin header); fall back to the rendered body length.
@@ -416,6 +428,7 @@ function renderTimingLine(
     wrap.insertBefore(line, wrap.firstChild);
   }
   line.dataset.sig = sig;
+  line.classList.toggle("endpoint-atlas-timing--dark", isDarkBackground(wrap));
   line.textContent = "";
 
   const primary = document.createElement("span");

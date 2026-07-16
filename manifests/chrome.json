@@ -1,13 +1,19 @@
 {
   "manifest_version": 3,
   "name": "Endpoint Atlas",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Adds a quick-navigation sidebar and auth status indicator to Swagger UI pages.",
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": ["styles.css"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
       "run_at": "document_idle"
     }
   ]
